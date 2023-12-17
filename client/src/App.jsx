@@ -1,9 +1,14 @@
-function App() {
+import React from 'react';
+import Navbar from './pages/Home/navbar'; 
+import Home from './pages/Home/home';
+
+const App = () => {
   return (
-    <div className="bg-slate-500 h-screen w-screen">
-      <h1 className="text-white text-3xl text-center p-2">VaxTracker</h1>
+    <div>
+      <Navbar />
+      <Home />
     </div>
   );
-}
+};
 
 export default App;
