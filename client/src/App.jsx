@@ -1,8 +1,18 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './pages/login/login';
+import ForgotPassword from './pages/login/forgot-password';
+import RegistrationPage from './pages/login/register';
+
 function App() {
   return (
-    <div className="bg-slate-500 h-screen w-screen">
-      <h1 className="text-white text-3xl text-center p-2">VaxTracker</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/register" element={<RegistrationPage />} />
+      </Routes>
+    </Router>
   );
 }
 
