@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './pages/auth/login';
 import ForgotPassword from './pages/auth/forgot-password';
 import RegistrationPage from './pages/auth/register';
-import Navbar from './pages/Home/navbar'; 
 import Home from './pages/Home/home';
 
 function App() {
@@ -16,6 +15,6 @@ function App() {
       </Routes>
     </Router>
   );
-};
+}
 
 export default App;
