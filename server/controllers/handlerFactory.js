@@ -1,6 +1,6 @@
-const catchAsync = require('../utils/catchAsync');
-const AppError = require('./../utils/appError');
-const APIFeatures = require('./../utils/apiFeatures');
+const catchAsync = require("../utils/catchAsync");
+const AppError = require("./../utils/appError");
+const APIFeatures = require("./../utils/apiFeatures");
 
 exports.checkOwnership = (Model) =>
   catchAsync(async (req, res, next) => {
@@ -12,7 +12,7 @@ exports.checkOwnership = (Model) =>
     }
     if (fetchedItem.user.toString() !== req.user._id.toString()) {
       return next(
-        new AppError('You are unauthorized to perform this action', 401)
+        new AppError("You are unauthorized to perform this action", 401)
       );
     }
     req.fetchedItem = fetchedItem;
@@ -25,7 +25,7 @@ exports.createOne = (Model) =>
     const newDoc = await Model.create(req.body);
 
     res.status(201).json({
-      status: 'success',
+      status: "success",
       data: newDoc,
     });
   });
@@ -39,9 +39,9 @@ exports.getAll = (Model) =>
       .limitFields()
       .paginate();
     const fetchedDocs = await features.query;
-
+    console.log("Fetching complete");
     res.status(200).json({
-      status: 'success',
+      status: "success",
       results: fetchedDocs.length,
       data: fetchedDocs,
     });
@@ -49,7 +49,7 @@ exports.getAll = (Model) =>
 
 exports.getOne = () => (req, res, next) => {
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: req.fetchedItem,
   });
 };
@@ -62,7 +62,7 @@ exports.update = (Model) =>
     });
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: updatedDoc,
     });
   });
@@ -71,7 +71,7 @@ exports.delete = (Model) =>
   catchAsync(async (req, res, next) => {
     const deletedDoc = await Model.findByIdAndDelete(req.params.id);
     res.status(204).json({
-      status: 'success',
+      status: "success",
       data: deletedDoc,
     });
   });
