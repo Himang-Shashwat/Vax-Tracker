@@ -1,0 +1,68 @@
+[
+  {
+    "name": "BCG",
+    "sideEffects": "Common side effects include redness or a small bump at the injection site. Serious side effects are rare but can include severe allergic reactions.",
+    "importance": "BCG is crucial for the prevention of tuberculosis, especially in regions with a high prevalence of the disease. It is often administered to infants in areas where TB is prevalent.",
+    "administrationAge": [0]
+  },
+  {
+    "name": "OPV",
+    "sideEffects": "The vaccine is generally safe and effective. Common side effects may include mild gastrointestinal symptoms, and serious side effects are extremely rare.",
+    "importance": "OPV is crucial in the global effort to eradicate polio. It has played a significant role in reducing the incidence of polio worldwide. The oral form is particularly useful for mass vaccination campaigns.",
+    "administrationAge": [0, 2, 3, 4, 9, 60]
+  },
+  {
+    "name": "Hepatitis B",
+    "sideEffects": "Common side effects are mild and include soreness at the injection site and mild fever. Serious side effects are extremely rare.",
+    "importance": "The Hepatitis B vaccine is essential for preventing a potentially serious and life-threatening infection of the liver. It is a crucial part of routine immunization schedules globally.",
+    "administrationAge": [0, 2, 9]
+  },
+  {
+    "name": "DTP",
+    "sideEffects": "Common side effects may include redness or swelling at the injection site, mild fever, or fussiness. Serious side effects are rare but may include severe allergic reactions.",
+    "importance": "DTP is crucial in preventing these three serious and potentially life-threatening diseases. It is a standard childhood vaccine that contributes significantly to public health.",
+    "administrationAge": [2, 3, 4, 16, 60]
+  },
+  {
+    "name": "Hib",
+    "sideEffects": "Common side effects are generally mild and can include redness or swelling at the injection site, fever, or irritability. Serious side effects are rare. However, in some cases, severe allergic reactions may occur.",
+    "importance": "The Hib vaccine is crucial in preventing serious and potentially life-threatening infections caused by Haemophilus influenzae type b, particularly in young children. It is a routine childhood vaccine.",
+    "administrationAge": [2, 3, 4, 16]
+  },
+  {
+    "name": "Rotavirus",
+    "sideEffects": "Common side effects are generally mild and can include temporary diarrhea or irritability. Serious side effects are extremely rare.",
+    "importance": "The Rotavirus vaccine is essential in preventing severe cases of diarrhea, dehydration, and related complications in infants. It is a routine part of childhood immunization programs.",
+    "administrationAge": [2, 3, 4]
+  },
+  {
+    "name": "Measles, Mumps, and Rubella (MMR)",
+    "sideEffects": "Common side effects are generally mild and may include fever, rash, and temporary pain or swelling at the injection site. Serious side effects are rare.",
+    "importance": "MMR is crucial in preventing the spread of these highly contagious and potentially serious viral infections. It is a standard childhood vaccine and is often given in two doses.",
+    "administrationAge": [9, 14, 60]
+  },
+  {
+    "name": "Typhoid Conjugate (TCV)",
+    "sideEffects": "Common side effects are generally mild and may include pain or swelling at the injection site, fever, or headache. Serious side effects are rare.",
+    "importance": "TCV is crucial for preventing typhoid fever, a potentially severe and life-threatening illness. It is particularly important for individuals traveling to areas with a high risk of typhoid.",
+    "administrationAge": [9, 24]
+  },
+  {
+    "name": "Hepatitis A",
+    "sideEffects": "Common side effects are generally mild and may include soreness at the injection site, headache, or fatigue. Serious side effects are rare.",
+    "importance": "The Hepatitis A vaccine is crucial for preventing Hepatitis A, which can cause severe illness and is transmitted through contaminated food and water. It is a routine part of childhood immunization in some regions and is recommended for certain at-risk populations.",
+    "administrationAge": [12]
+  },
+  {
+    "name": "Varicella",
+    "sideEffects": "Common side effects are generally mild and may include soreness or redness at the injection site, fever, or rash. Serious side effects are rare.",
+    "importance": "The Varicella vaccine is crucial for preventing Chickenpox, which can lead to severe complications, especially in adults. It is a routine childhood vaccine in many regions.",
+    "administrationAge": [60]
+  },
+  {
+    "name": "Tdap",
+    "sideEffects": "Common side effects are generally mild and may include pain or swelling at the injection site, fever, or headache. Serious side effects are rare.",
+    "importance": "Tdap is crucial for preventing these three bacterial infections. It is commonly given to adolescents and adults as a booster, and it is particularly important for pregnant individuals to protect newborns from pertussis.",
+    "administrationAge": [30]
+  }
+]

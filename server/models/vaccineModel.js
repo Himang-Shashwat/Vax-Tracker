@@ -3,13 +3,8 @@ const mongoose = require("mongoose");
 const vaccineSchema = mongoose.Schema({
   name: {
     type: String,
-    maxLength: [50, "Name of the vaccine should be less than 20 characters"],
+    maxLength: [50, "Name of the vaccine should be less than 50 characters"],
     required: [true, "Name of the vaccine is required"],
-  },
-  disease: {
-    type: String,
-    maxLength: [50, "Name of the disease should be less than 20 characters"],
-    required: [true, "Name of the disease is required"],
   },
   sideEffects: {
     type: String,
