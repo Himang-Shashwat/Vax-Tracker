@@ -1,6 +1,7 @@
 const express = require("express");
 const userRouter = require("./routers/userRoutes");
 const vaccineRouter = require("./routers/vaccineRoutes");
+const childRouter = require("./routers/childRoutes");
 const globalErrorHandler = require("./controllers/errorController");
 const morgan = require("morgan");
 const AppError = require("./utils/appError");
@@ -16,6 +17,7 @@ app.use(cookieParser());
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/vaccines", vaccineRouter);
+app.use("/api/v1/child/", childRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

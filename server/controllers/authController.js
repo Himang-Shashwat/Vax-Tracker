@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const AppError = require("./../utils/appError");
 const sendEmail = require("./../utils/email");
 const crypto = require("crypto");
+const Child = require("../models/childModel");
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {

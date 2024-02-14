@@ -15,6 +15,7 @@ exports.checkOwnership = (Model) =>
         new AppError("You are unauthorized to perform this action", 401)
       );
     }
+
     req.fetchedItem = fetchedItem;
     next();
   });
