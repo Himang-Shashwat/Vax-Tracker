@@ -73,3 +73,40 @@ exports.addImmunization = catchAsync(async (req, res, next) => {
     data: createdImmunization,
   });
 });
+
+exports.updateImmunization = catchAsync(async (req, res, next) => {
+  let updatedRecord;
+  const { administrationDate, currentStatus } = req.body;
+
+  const fetchedItem = await Immunization.findById(req.params.immunizationId);
+  if (!fetchedItem) {
+    return next(
+      new AppError("No immunization record with that id was found", 404)
+    );
+  }
+
+  if (
+    req.user.role === "user" &&
+    fetchedItem.currentStatus === "scheduled" &&
+    fetchedItem.currentStatus !== "completed"
+  )
+    updatedRecord = { administrationDate };
+  else if (
+    req.user.role === "hospital" &&
+    fetchedItem.currentStatus !== "completed"
+  )
+    updatedRecord = { administrationDate, currentStatus };
+  const updatedImmunization = await Immunization.findByIdAndUpdate(
+    req.params.immunizationId,
+    updatedRecord,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  res.status(200).json({
+    status: "success",
+    data: updatedImmunization,
+  });
+});

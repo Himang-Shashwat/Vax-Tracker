@@ -15,7 +15,8 @@ router
 
 router
   .route("/:id/immunizations/:immunizationId")
-  .get(immunizationController.getOneImmunization);
+  .get(immunizationController.getOneImmunization)
+  .patch(immunizationController.updateImmunization);
 
 router
   .route("/:id")
