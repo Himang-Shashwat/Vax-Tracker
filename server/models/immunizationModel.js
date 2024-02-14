@@ -11,6 +11,11 @@ const immunizationSchema = mongoose.Schema({
     ref: "Child",
     required: [true, "Immunization must belong to a child"],
   },
+  hospitalId: {
+    type: mongoose.Schema.ObjectId,
+    ref: "user",
+    required: [true, "Immunization must have a hospital associated"],
+  },
   administrationDate: {
     type: Date,
     required: [true, "Date of administration is required"],

@@ -2,10 +2,21 @@ const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/authController");
 const childController = require("../controllers/childController");
-const handlerFactory = require("../controllers/handlerFactory");
-const Child = require("../models/childModel");
+const immunizationController = require("../controllers/immunizationController");
 
 router.use(authController.protect);
+
+router
+  .route("/:id/immunizations")
+  .get(
+    authController.restrictTo("user"),
+    immunizationController.getAllImmunizationsUser
+  );
+
+router
+  .route("/:id/immunizations/:immunizationId")
+  .get(immunizationController.getOneImmunization);
+
 router
   .route("/:id")
   .get(childController.getOneChild)

@@ -5,7 +5,18 @@ const jwt = require("jsonwebtoken");
 const AppError = require("./../utils/appError");
 const sendEmail = require("./../utils/email");
 const crypto = require("crypto");
-const Child = require("../models/childModel");
+
+exports.isAuthorized = (user, fetchedItem, ...roles) => {
+  for (const role of roles) {
+    if (
+      user.role === role &&
+      fetchedItem[`${role}Id`].toString() === user._id.toString()
+    ) {
+      return true;
+    }
+  }
+  return false;
+};
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
