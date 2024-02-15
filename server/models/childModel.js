@@ -19,7 +19,7 @@ const childSchema = mongoose.Schema({
     ref: "User",
     required: [true, "A child must have a hospital associated with them"],
   },
-  vaccinations: [{ type: mongoose.Schema.ObjectId, ref: "Immunization" }],
+  // vaccinations: [{ type: mongoose.Schema.ObjectId, ref: "Immunization" }],
 });
 
 const Child = mongoose.model("Child", childSchema);

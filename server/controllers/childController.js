@@ -1,5 +1,8 @@
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
+const Vaccine = require("../models/vaccineModel");
+const Immunization = require("../models/immunizationModel");
+const dateFns = require("date-fns");
 const Child = require("../models/childModel");
 const APIFeatures = require("../utils/apiFeatures");
 const authController = require("./authController");
@@ -24,13 +27,69 @@ exports.getAllChildren = catchAsync(async (req, res, next) => {
 });
 
 exports.createChild = catchAsync(async (req, res, next) => {
-  req.body.userId = req.user.id;
-  const newChild = await Child.create(req.body);
+  const { name, dateOfBirth, hospitalId } = req.body;
+  const userId = req.user.id;
+
+  const child = await Child.create({
+    name,
+    dateOfBirth,
+    userId,
+    hospitalId,
+  });
+
+  const immunizationRecords = [];
+  const vaccines = await Vaccine.find({});
+  for (const vaccine of vaccines) {
+    const firstAge = vaccine.administrationAge[0];
+    const administrationDate = dateFns.addWeeks(dateOfBirth, firstAge);
+    const immunization = await Immunization.create({
+      vaccineId: vaccine._id,
+      childId: child._id,
+      hospitalId,
+      administrationDate,
+      currentStatus: "upcoming",
+    });
+    immunizationRecords.push(immunization);
+  }
 
   res.status(201).json({
     status: "success",
-    data: newChild,
+    data: {
+      child,
+      immunizationRecords,
+    },
   });
+
+  // req.body.userId = req.user.id;
+  // const vaccineRecords = await Vaccine.find({});
+  // const newChild = await Child.create(req.body);
+  // const immunizationRecords = [];
+
+  // for (const vaccineRecord of vaccineRecords) {
+  //   console.log(vaccineRecord.administrationAge);
+  //   administrationDate = dateFns.addWeeks(
+  //     new Date(),
+  //     vaccineRecord.adminstrationAge?.[0]
+  //   );
+  //   console.log(administrationDate);
+  //   const immunization = {
+  //     vaccineId: vaccineRecord._id,
+  //     childId: newChild._id,
+  //     hospitalId: newChild.hospitalId,
+  //     administrationDate,
+  //     currentStatus: "upcoming",
+  //   };
+  //   const newImmunization = await Immunization.create(immunization);
+  //   immunizationRecords.push(newImmunization);
+  //   // const immunizationRecord = await Immunization.create();
+  // }
+
+  // console.log(immunizationRecords);
+
+  // res.status(201).json({
+  //   status: "success",
+  //   data: newChild,
+  // });
 });
 
 exports.getOneChild = catchAsync(async (req, res, next) => {

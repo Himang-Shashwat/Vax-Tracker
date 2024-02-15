@@ -8,11 +8,10 @@ router.use(authController.protect);
 
 //These are only for hospitals users, for normal users refer childRoutes.js
 router
-  .route("/")
-  .post(immunizationController.addImmunization)
-  .get(
-    authController.restrictTo("hospital"),
-    immunizationController.getAllImmunizationsHospital
-  );
+  .route("/:id")
+  .get(immunizationController.getOneImmunization)
+  .patch(immunizationController.updateImmunization);
+
+router.route("/").get(immunizationController.getAllImmunizationsHospital);
 
 module.exports = router;

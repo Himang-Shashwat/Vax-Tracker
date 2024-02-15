@@ -46,10 +46,7 @@ exports.getAllImmunizationsHospital = catchAsync(async (req, res, next) => {
 });
 
 exports.getOneImmunization = catchAsync(async (req, res, next) => {
-  const fetchedImmunization = await Immunization.findOne({
-    childId: req.params.id,
-    _id: req.params.immunizationId,
-  });
+  const fetchedImmunization = await Immunization.findById(req.params.id);
 
   if (!fetchedImmunization) {
     return next(
@@ -65,20 +62,20 @@ exports.getOneImmunization = catchAsync(async (req, res, next) => {
   });
 });
 
-//Only for testing, all the immunization records will be added when the child record is created
-exports.addImmunization = catchAsync(async (req, res, next) => {
-  const createdImmunization = await Immunization.create(req.body);
-  res.status(201).json({
-    status: "success",
-    data: createdImmunization,
-  });
-});
+// //Only for testing, all the immunization records will be added when the child record is created
+// exports.addImmunization = catchAsync(async (req, res, next) => {
+//   const createdImmunization = await Immunization.create(req.body);
+//   res.status(201).json({
+//     status: "success",
+//     data: createdImmunization,
+//   });
+// });
 
 exports.updateImmunization = catchAsync(async (req, res, next) => {
   let updatedRecord;
   const { administrationDate, currentStatus } = req.body;
 
-  const fetchedItem = await Immunization.findById(req.params.immunizationId);
+  const fetchedItem = await Immunization.findById(req.params.id);
   if (!fetchedItem) {
     return next(
       new AppError("No immunization record with that id was found", 404)
@@ -97,7 +94,7 @@ exports.updateImmunization = catchAsync(async (req, res, next) => {
   )
     updatedRecord = { administrationDate, currentStatus };
   const updatedImmunization = await Immunization.findByIdAndUpdate(
-    req.params.immunizationId,
+    req.params.id,
     updatedRecord,
     {
       new: true,
