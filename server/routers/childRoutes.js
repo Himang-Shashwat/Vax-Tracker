@@ -13,7 +13,6 @@ router
     immunizationController.getAllImmunizationsUser
   );
 
-//For getting all immunization records for a child
 router
   .route("/:id/immunizations/")
   .get(immunizationController.getOneImmunization);

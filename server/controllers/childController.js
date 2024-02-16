@@ -59,37 +59,6 @@ exports.createChild = catchAsync(async (req, res, next) => {
       immunizationRecords,
     },
   });
-
-  // req.body.userId = req.user.id;
-  // const vaccineRecords = await Vaccine.find({});
-  // const newChild = await Child.create(req.body);
-  // const immunizationRecords = [];
-
-  // for (const vaccineRecord of vaccineRecords) {
-  //   console.log(vaccineRecord.administrationAge);
-  //   administrationDate = dateFns.addWeeks(
-  //     new Date(),
-  //     vaccineRecord.adminstrationAge?.[0]
-  //   );
-  //   console.log(administrationDate);
-  //   const immunization = {
-  //     vaccineId: vaccineRecord._id,
-  //     childId: newChild._id,
-  //     hospitalId: newChild.hospitalId,
-  //     administrationDate,
-  //     currentStatus: "upcoming",
-  //   };
-  //   const newImmunization = await Immunization.create(immunization);
-  //   immunizationRecords.push(newImmunization);
-  //   // const immunizationRecord = await Immunization.create();
-  // }
-
-  // console.log(immunizationRecords);
-
-  // res.status(201).json({
-  //   status: "success",
-  //   data: newChild,
-  // });
 });
 
 exports.getOneChild = catchAsync(async (req, res, next) => {

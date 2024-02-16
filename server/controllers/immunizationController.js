@@ -62,15 +62,6 @@ exports.getOneImmunization = catchAsync(async (req, res, next) => {
   });
 });
 
-// //Only for testing, all the immunization records will be added when the child record is created
-// exports.addImmunization = catchAsync(async (req, res, next) => {
-//   const createdImmunization = await Immunization.create(req.body);
-//   res.status(201).json({
-//     status: "success",
-//     data: createdImmunization,
-//   });
-// });
-
 exports.updateImmunization = catchAsync(async (req, res, next) => {
   let updatedRecord;
   const { administrationDate, currentStatus } = req.body;
