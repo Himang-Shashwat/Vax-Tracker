@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav className="bg-blue-800 p-4">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
-        <div className="text-white text-lg font-bold">VaxTracker</div>
+        <a href="\"className="text-white text-lg font-bold">VaxTracker</a>
 
         {/* Features or Auth Buttons based on authentication status */}
         <div className="flex space-x-4">
@@ -34,8 +34,8 @@ const Navbar = () => {
             <a href="#" className="text-white hover:text-gray-300">Logout</a>
           ) : (
             <>
-              <a href="#" className="text-white hover:text-gray-300">Login</a>
-              <a href="#" className="text-white hover:text-gray-300">Register</a>
+              <a href="/login" className="text-white hover:text-gray-300">Login</a>
+              <a href="/register" className="text-white hover:text-gray-300">Register</a>
             </>
           )}
         </div>
