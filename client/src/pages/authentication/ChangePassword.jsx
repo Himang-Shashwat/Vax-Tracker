@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { logOut } from "../redux/user/userSlice";
+import { logOut } from "../../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 
 export default function ChangePassword() {
@@ -24,7 +24,7 @@ export default function ChangePassword() {
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        toast.error(err.response.data.message);
         setIsLoading(false);
       });
   };

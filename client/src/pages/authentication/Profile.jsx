@@ -7,11 +7,11 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { app } from "../firebase";
+import { app } from "../../firebase";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { updateUser, logOut } from "../redux/user/userSlice";
+import { updateUser, logOut } from "../../redux/user/userSlice";
 
 export default function Profile() {
   const fileRef = useRef(null);

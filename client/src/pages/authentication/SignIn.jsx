@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { signIn } from "../redux/user/userSlice";
-import OAuth from "../components/OAuth";
+import { signIn } from "../../redux/user/userSlice";
+import OAuth from "../../components/OAuth";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
@@ -24,6 +24,7 @@ export default function SignIn() {
         withCredentials: true,
       })
       .then((data) => {
+        console.log(data.data);
         dispatch(signIn(data.data.user));
         setIsLoading(false);
         navigate("/");

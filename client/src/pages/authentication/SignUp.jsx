@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { signIn } from "../redux/user/userSlice";
-import OAuth from "../components/OAuth";
+import { signIn } from "../../redux/user/userSlice";
+import OAuth from "../../components/OAuth";
 
 export default function SignUp() {
   const dispatch = useDispatch();
@@ -33,7 +33,6 @@ export default function SignUp() {
       })
       .catch((err) => {
         setIsLoading(false);
-        console.log(err);
         toast.error(err.response.data.message);
       });
   };
