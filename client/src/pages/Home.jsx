@@ -5,9 +5,11 @@ import { useSelector } from "react-redux";
 export default function Home() {
   const { currentUser } = useSelector((state) => state.user);
 
-  return currentUser.role === "hospital" ? (
-    <HospitalDashboard />
-  ) : (
-    <ParentDashboard />
+  return (
+    <>
+      {currentUser == null && <div>Home</div>}
+      {currentUser?.role === "hospital" && <HospitalDashboard />}
+      {currentUser?.role === "user" && <ParentDashboard />}
+    </>
   );
 }
