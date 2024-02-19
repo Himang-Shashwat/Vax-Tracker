@@ -9,6 +9,8 @@ import { Toaster } from "react-hot-toast";
 import ChangePassword from "./pages/authentication/ChangePassword";
 import ForgotPassword from "./pages/authentication/ForgotPassword";
 import ResetPassword from "./pages/authentication/ResetPassword";
+import Vaccines from "./pages/vaccines/Vaccines";
+import Children from "./pages/children/Children";
 
 function App() {
   return (
@@ -24,9 +26,11 @@ function App() {
             path="/reset-password/:resetToken"
             element={<ResetPassword />}
           />
+          <Route path="/vaccines" element={<Vaccines />} />
           <Route element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
-            <Route path="/change-password" element={<ChangePassword />}></Route>
+            <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="/children" element={<Children />} />
           </Route>
         </Routes>
       </BrowserRouter>

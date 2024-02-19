@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
+
   return (
     <header className="bg-slate-200 shadow-md">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
@@ -14,21 +14,32 @@ export default function Header() {
           </h1>
         </Link>
         <ul className="flex gap-4 items-center">
-          <Link to="/">
+          <Link to="/vaccines">
             <li className="hidden sm:inline text-slate-700 hover:underline">
               Vaccines
             </li>
           </Link>
-          <Link to="/">
-            <li className="hidden sm:inline text-slate-700 hover:underline">
-              Children
-            </li>
-          </Link>
-          <Link to="/">
-            <li className="hidden sm:inline text-slate-700 hover:underline">
-              Reports
-            </li>
-          </Link>
+          {currentUser && (
+            <>
+              <Link to="/">
+                <li className="hidden sm:inline text-slate-700 hover:underline">
+                  Dashboard
+                </li>
+              </Link>
+              <Link to="/children">
+                <li className="hidden sm:inline text-slate-700 hover:underline">
+                  Children
+                </li>
+              </Link>
+            </>
+          )}
+          {currentUser?.role === "user" && (
+            <Link to="/">
+              <li className="hidden sm:inline text-slate-700 hover:underline">
+                Reports
+              </li>
+            </Link>
+          )}
           <Link to="/profile">
             {currentUser ? (
               <img

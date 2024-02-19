@@ -55,6 +55,15 @@ export default function SignUp() {
           className="border p-3 rounded-lg"
           onChange={handleChange}
         />
+        <select
+          onChange={handleChange}
+          placeholder="Parent"
+          id="role"
+          className="border p-3 rounded-lg"
+        >
+          <option value="user">User</option>
+          <option value="hospital">Hospital</option>
+        </select>
         <input
           type="password"
           minLength={8}

@@ -24,7 +24,6 @@ export default function SignIn() {
         withCredentials: true,
       })
       .then((data) => {
-        console.log(data.data);
         dispatch(signIn(data.data.user));
         setIsLoading(false);
         navigate("/");
