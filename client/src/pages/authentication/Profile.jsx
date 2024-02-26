@@ -83,7 +83,7 @@ export default function Profile() {
         dispatch(logOut());
         toast.success("You have been logged out!");
       })
-      .catch((err) => toast.err(err.response.data.message));
+      .catch((err) => toast.error(err.response.data.message));
   };
 
   const handleDelete = () => {

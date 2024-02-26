@@ -30,7 +30,10 @@ exports.getAllImmunizationsUser = catchAsync(async (req, res, next) => {
 exports.getAllImmunizationsHospital = catchAsync(async (req, res, next) => {
   let filter = { hospitalId: req.user.id, currentStatus: { $ne: "upcoming" } };
 
-  const features = new APIFeatures(Immunization.find(filter), req.query)
+  const features = new APIFeatures(
+    Immunization.find(filter).populate("vaccineId").populate("childId"),
+    req.query
+  )
     .filter()
     .sort()
     .limitFields()
@@ -73,17 +76,13 @@ exports.updateImmunization = catchAsync(async (req, res, next) => {
     );
   }
 
-  if (
-    req.user.role === "user" &&
-    fetchedItem.currentStatus === "scheduled" &&
-    fetchedItem.currentStatus !== "completed"
-  )
-    updatedRecord = { administrationDate };
-  else if (
-    req.user.role === "hospital" &&
-    fetchedItem.currentStatus !== "completed"
-  )
-    updatedRecord = { administrationDate, currentStatus };
+  if (fetchedItem.currentStatus === "completed")
+    return next(
+      new AppError("Can't update immunization which is already completed", 403)
+    );
+
+  updatedRecord = { administrationDate, currentStatus };
+
   const updatedImmunization = await Immunization.findByIdAndUpdate(
     req.params.id,
     updatedRecord,
