@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ImmunizationModal from "./ImmunizationModal";
 
-const ImmunizationCard = ({ data }) => {
+const ImmunizationCard = ({ data, onUpdate }) => {
   const [showModal, setShowModal] = useState(false);
 
   const navigate = useNavigate();
@@ -26,10 +26,15 @@ const ImmunizationCard = ({ data }) => {
       <h2>Name: {data.childId.name}</h2>
       <p>Vaccine: {data.vaccineId.name}</p>
       <p>Scheduled Date: {scheduledDate}</p>
+      <p>
+        Current Status:{" "}
+        {data.currentStatus.replace(/^./, (match) => match.toUpperCase())}
+      </p>
       {showModal && (
         <ImmunizationModal
           immunization={data}
           onClose={() => setShowModal(false)}
+          onUpdate={onUpdate}
         />
       )}
     </div>
