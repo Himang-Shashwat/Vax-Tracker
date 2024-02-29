@@ -2,7 +2,6 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const Immunization = require("../models/immunizationModel");
 const APIFeatures = require("../utils/apiFeatures");
-const authController = require("./authController");
 
 exports.getAllImmunizationsUser = catchAsync(async (req, res, next) => {
   let filter = { childId: req.params.id };

@@ -8,10 +8,7 @@ router.use(authController.protect);
 
 router
   .route("/:id/immunizations")
-  .get(
-    authController.restrictTo("user"),
-    immunizationController.getAllImmunizationsUser
-  );
+  .get(immunizationController.getAllImmunizationsUser);
 
 router
   .route("/:id/immunizations/")

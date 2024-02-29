@@ -1,22 +1,16 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import ImmunizationModal from "./ImmunizationModal";
+import { useState } from 'react';
+import ImmunizationModal from './ImmunizationModal';
 
 const ImmunizationCard = ({ data, onUpdate }) => {
   const [showModal, setShowModal] = useState(false);
 
-  const navigate = useNavigate();
   if (!data || !data.vaccineId || !data.childId) {
     return <p>Error: Missing required data in immunization record.</p>;
   }
 
   const scheduledDate = data.administrationDate
     ? new Date(data.administrationDate).toLocaleDateString()
-    : "";
-
-  const openModal = () => {
-    setShowModal(true);
-  };
+    : '';
 
   return (
     <div
@@ -27,7 +21,7 @@ const ImmunizationCard = ({ data, onUpdate }) => {
       <p>Vaccine: {data.vaccineId.name}</p>
       <p>Scheduled Date: {scheduledDate}</p>
       <p>
-        Current Status:{" "}
+        Current Status:{' '}
         {data.currentStatus.replace(/^./, (match) => match.toUpperCase())}
       </p>
       {showModal && (
