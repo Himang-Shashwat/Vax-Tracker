@@ -53,9 +53,12 @@ export default function ChildModal({ child, onClose, onUpdate }) {
             {new Date(child.dateOfBirth).toLocaleDateString()}
           </h2>
         </div>
-        <div className="flex justify-between items-center gap-x-2 mt-4 p-4">
-          <Link to={`/children/details/${child._id}`}>Get Details</Link>
-        </div>
+        <Link
+          to={`/children/details/${child._id}`}
+          className="bg-slate-500 mt-2 mb-1 p-3 rounded-lg w-full text-center"
+        >
+          Get Details
+        </Link>
       </div>
     </div>
   );

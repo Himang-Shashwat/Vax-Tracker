@@ -1,12 +1,15 @@
-const catchAsync = require("../utils/catchAsync");
-const AppError = require("../utils/appError");
-const Immunization = require("../models/immunizationModel");
-const APIFeatures = require("../utils/apiFeatures");
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
+const Immunization = require('../models/immunizationModel');
+const APIFeatures = require('../utils/apiFeatures');
 
 exports.getAllImmunizationsUser = catchAsync(async (req, res, next) => {
   let filter = { childId: req.params.id };
 
-  const features = new APIFeatures(Immunization.find(filter), req.query)
+  const features = new APIFeatures(
+    Immunization.find(filter).populate('vaccineId'),
+    req.query
+  )
     .filter()
     .sort()
     .limitFields()
@@ -15,22 +18,22 @@ exports.getAllImmunizationsUser = catchAsync(async (req, res, next) => {
   const fetchedImmunizations = await features.query;
   if (!fetchedImmunizations) {
     return next(
-      new AppError("No immunizations associated with the given id", 404)
+      new AppError('No immunizations associated with the given id', 404)
     );
   }
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     results: fetchedImmunizations.length,
     data: fetchedImmunizations,
   });
 });
 
 exports.getAllImmunizationsHospital = catchAsync(async (req, res, next) => {
-  let filter = { hospitalId: req.user.id, currentStatus: { $ne: "upcoming" } };
+  let filter = { hospitalId: req.user.id, currentStatus: { $ne: 'upcoming' } };
 
   const features = new APIFeatures(
-    Immunization.find(filter).populate("vaccineId").populate("childId"),
+    Immunization.find(filter).populate('vaccineId').populate('childId'),
     req.query
   )
     .filter()
@@ -41,7 +44,7 @@ exports.getAllImmunizationsHospital = catchAsync(async (req, res, next) => {
   const fetchedImmunizations = await features.query;
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     results: fetchedImmunizations.length,
     data: fetchedImmunizations,
   });
@@ -59,7 +62,7 @@ exports.getOneImmunization = catchAsync(async (req, res, next) => {
   }
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: fetchedImmunization,
   });
 });
@@ -71,11 +74,11 @@ exports.updateImmunization = catchAsync(async (req, res, next) => {
   const fetchedItem = await Immunization.findById(req.params.id);
   if (!fetchedItem) {
     return next(
-      new AppError("No immunization record with that id was found", 404)
+      new AppError('No immunization record with that id was found', 404)
     );
   }
 
-  if (fetchedItem.currentStatus === "completed")
+  if (fetchedItem.currentStatus === 'completed')
     return next(
       new AppError("Can't update immunization which is already completed", 403)
     );
@@ -92,7 +95,7 @@ exports.updateImmunization = catchAsync(async (req, res, next) => {
   );
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: updatedImmunization,
   });
 });
