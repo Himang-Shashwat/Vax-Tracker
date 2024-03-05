@@ -72,8 +72,6 @@ export default function ShowChild() {
     </div>
   ));
 
-  console.log(child);
-
   return (
     <div className="m-4">
       {isLoadingOne || isLoadingTwo ? (
