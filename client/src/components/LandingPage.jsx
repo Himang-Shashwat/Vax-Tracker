@@ -30,7 +30,7 @@ export default function LandingPage() {
         <h2 className="text-3xl">Why parents love VaxTracker</h2>
         <p className="font-light text-md mb-8">
           VaxTracker makes it easy to schedule and keep track of child's
-          immunization history, so you can stay organized and informed
+          immunization history, so you <br /> can stay organized and informed
         </p>
         <div className="grid grid-cols-3 gap-4 mt-4 justify-between">
           <div>
