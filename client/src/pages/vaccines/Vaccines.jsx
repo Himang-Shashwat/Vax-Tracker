@@ -30,11 +30,11 @@ export default function Vaccines() {
   const handleSearch = (value) => setSearchQuery(value);
 
   const filteredVaccines = vaccines.filter((vaccine) =>
-    vaccine.name.toLowerCase().includes(searchQuery.toLowerCase())
+    vaccine.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
-    <div className="m-4">
+    <div className="w-[80%] mx-auto m-4">
       {isLoading ? (
         <Spinner />
       ) : (

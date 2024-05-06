@@ -15,7 +15,10 @@ const SearchFilterReset = ({ onSearch, onFilter, onReset }) => {
         <option value="scheduled">Scheduled</option>
         <option value="completed">Completed</option>
       </select>
-      <button onClick={onReset} className="my-2 p-2 bg-gray-200 rounded-md">
+      <button
+        onClick={onReset}
+        className="my-2 px-4 py-2 bg-gray-200 rounded-md"
+      >
         Reset
       </button>
     </div>

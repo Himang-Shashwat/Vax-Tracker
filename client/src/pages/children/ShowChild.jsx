@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
-import Spinner from '../../ui/Spinner';
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import Spinner from "../../ui/Spinner";
 
 export default function ShowChild() {
   const [child, setChild] = useState({});
@@ -25,7 +25,7 @@ export default function ShowChild() {
       .catch((err) => {
         console.log(err);
         setIsLoadingOne(false);
-        toast.error('There was an error fetching information');
+        toast.error("There was an error fetching information");
       })
       .finally(() => {
         setIsLoadingOne(false);
@@ -42,7 +42,7 @@ export default function ShowChild() {
       .catch((err) => {
         console.log(err);
         setIsLoadingTwo(false);
-        toast.error('There was an error fetching information');
+        toast.error("There was an error fetching information");
       })
       .finally(() => {
         setIsLoadingTwo(false);
@@ -58,14 +58,14 @@ export default function ShowChild() {
     >
       <h4>Vaccine: {immunization.vaccineId.name}</h4>
       <p>
-        Current Status:{' '}
+        Current Status:{" "}
         {immunization.currentStatus.replace(/^./, (match) =>
-          match.toUpperCase()
+          match.toUpperCase(),
         )}
       </p>
       {immunization.administrationDate && (
         <p>
-          Administration Date:{' '}
+          Administration Date:{" "}
           {new Date(immunization.administrationDate).toLocaleDateString()}
         </p>
       )}
@@ -73,7 +73,7 @@ export default function ShowChild() {
   ));
 
   return (
-    <div className="m-4">
+    <div className="w-[80%] mx-auto">
       {isLoadingOne || isLoadingTwo ? (
         <Spinner />
       ) : (

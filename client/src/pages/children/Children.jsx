@@ -43,17 +43,17 @@ export default function Children() {
   };
 
   const filteredChildren = children.filter((record) =>
-    record.name.toLowerCase().includes(searchQuery.toLowerCase())
+    record.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   console.log(children);
   return (
-    <div className="m-4">
+    <div className="w-[80%] mx-auto mt-4">
       <SearchFilterReset onSearch={handleSearch} onReset={handleReset} />
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="mt-2 grid grid-cols-2 gap-4">
+        <div className="mt-2 grid grid-cols-3 gap-4">
           {filteredChildren.length > 0 ? (
             filteredChildren.map((record) => (
               <ChildCard key={record._id} data={record} onUpdate={onUpdate} />

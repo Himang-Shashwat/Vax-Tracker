@@ -47,16 +47,16 @@ export default function HospitalDashboard() {
 
   const filteredImmunizations = immunizations
     .filter((record) =>
-      record.childId.name.toLowerCase().includes(searchQuery.toLowerCase())
+      record.childId.name.toLowerCase().includes(searchQuery.toLowerCase()),
     )
     .filter((record) =>
       currentStatusFilter === "all"
         ? true
-        : record.currentStatus === currentStatusFilter
+        : record.currentStatus === currentStatusFilter,
     );
 
   return (
-    <div className="m-4">
+    <div className="w-[80%] mx-auto m-4">
       <h1 className="text-3xl">Welcome Back, {currentUser.name}</h1>
       <SearchFilterReset
         onSearch={handleSearch}
