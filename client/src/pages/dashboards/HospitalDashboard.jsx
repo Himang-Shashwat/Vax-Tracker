@@ -1,23 +1,44 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import ChildCard from "../../ui/ChildCard";
 import ImmunizationCard from "../../ui/ImmunizationCard";
 import Spinner from "../../ui/Spinner";
 import SearchFilterReset from "../../ui/SearchFilterReset";
 
-export default function HospitalDashboard() {
+export default function ParentDashboard() {
   const { currentUser } = useSelector((state) => state.user);
+  const [children, setChildren] = useState([]);
+  const [isLoadingChildren, setIsLoadingChildren] = useState(false);
+  const [isLoadingImmunizations, setIsLoadingImmunizations] = useState(false);
   const [immunizations, setImmunizations] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentStatusFilter, setCurrentStatusFilter] = useState("all");
 
   useEffect(() => {
+    fetchChildren();
     fetchImmunizations();
   }, []);
 
+  const fetchChildren = () => {
+    setIsLoadingChildren(true);
+    axios
+      .get("http://localhost:3000/api/v1/child", {
+        withCredentials: true,
+      })
+      .then((data) => {
+        setChildren(data.data.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching children:", err);
+      })
+      .finally(() => {
+        setIsLoadingChildren(false);
+      });
+  };
+
   const fetchImmunizations = () => {
-    setIsLoading(true);
+    setIsLoadingImmunizations(true);
     axios
       .get("http://localhost:3000/api/v1/immunizations", {
         withCredentials: true,
@@ -29,11 +50,12 @@ export default function HospitalDashboard() {
         console.error("Error fetching immunizations:", err);
       })
       .finally(() => {
-        setIsLoading(false);
+        setIsLoadingImmunizations(false);
       });
   };
 
-  const onUpdate = () => {
+  const onUpdateChildren = () => {
+    fetchChildren();
     fetchImmunizations();
   };
 
@@ -47,12 +69,12 @@ export default function HospitalDashboard() {
 
   const filteredImmunizations = immunizations
     .filter((record) =>
-      record.childId.name.toLowerCase().includes(searchQuery.toLowerCase()),
+      record.childId.name.toLowerCase().includes(searchQuery.toLowerCase())
     )
     .filter((record) =>
       currentStatusFilter === "all"
         ? true
-        : record.currentStatus === currentStatusFilter,
+        : record.currentStatus === currentStatusFilter
     );
 
   return (
@@ -63,21 +85,34 @@ export default function HospitalDashboard() {
         onFilter={handleFilter}
         onReset={handleReset}
       />
-      {isLoading ? (
+      {isLoadingChildren || isLoadingImmunizations ? (
         <Spinner />
       ) : (
-        <div className="mt-2 grid grid-cols-2 gap-4">
-          {filteredImmunizations.length > 0 ? (
-            filteredImmunizations.map((record) => (
-              <ImmunizationCard
-                key={record._id}
-                data={record}
-                onUpdate={onUpdate}
-              />
-            ))
-          ) : (
-            <p>No vaccinations found.</p>
-          )}
+        <div>
+          <div className="grid grid-cols-2 gap-4">
+            {children.map((child) => {
+              const childImmunizations = immunizations.filter(
+                (record) => record.childId._id === child._id
+              );
+              return (
+                <div key={child._id}>
+                  <ChildCard data={child} onUpdate={onUpdateChildren} />
+                  {childImmunizations.length > 0 && (
+                    <div>
+                      <h2>Immunization Records for {child.name}:</h2>
+                      {childImmunizations.map((record) => (
+                        <ImmunizationCard
+                          key={record._id}
+                          data={record}
+                          onUpdate={onUpdateChildren}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>

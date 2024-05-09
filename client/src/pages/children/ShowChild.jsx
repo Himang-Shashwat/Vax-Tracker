@@ -60,7 +60,7 @@ export default function ShowChild() {
       <p>
         Current Status:{" "}
         {immunization.currentStatus.replace(/^./, (match) =>
-          match.toUpperCase(),
+          match.toUpperCase()
         )}
       </p>
       {immunization.administrationDate && (
